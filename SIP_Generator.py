@@ -1,3 +1,5 @@
+
+import random
 """
 
       INVITE sip:bob@biloxi.com SIP/2.0
@@ -10,44 +12,47 @@
       Contact: <sip:alice@pc33.atlanta.com>
       Content-Type: application/sdp
       Content-Length: 142
-
-
+  
 """
+
+
+
 class SIP_Generator:
 
-    headers = ["Via: SIP/2.0/UDP","Max-Forwards:","To:","From:","Call-ID:","CSeq:","Contact:","Content-Type:","Content-Length:"]
+    headers = ["Via: SIP/2.0/","Max-Forwards: ","To: ","From: ","Call-ID: ","CSeq: ","Contact: ","Authorization: " ,"User-Agent: ","Content-Type: ","Content-Length: "]
           
     @staticmethod
-    def SetUserInfo():
-        pass
-  
-
-    @staticmethod
-    def GenerateSipMessage(method):
+    def GenerateSipMessage(method,lineport,protocol,to,displayname,proxy,Content_type,Content_length,callId=random.randint(111111111111,999999999999),cseq=1,authorization=0):
+        """ Pass in UA and Call information and a SIP Message is generated """
         print method + "\r"
         for header in SIP_Generator.headers:
-            if header == "Via: SIP/2.0/UDP":
-                print header
-            elif header == "Max-Forwards:":
-                print header
-            elif header == "To:":
-                print header
-            elif header == "From:":
-                print header
-            elif header == "Call-ID:":
-                print header
-            elif header == "CSeq:":
-                print header
-            elif header == "Contact:":
-                print header
-            elif header == "Content-Type:":
-                print header
-            elif header == "Content-Length:":
-                print header
+            if header == "Via: SIP/2.0/"+protocol+" "+proxy:
+                print header 
+            elif header == "Max-Forwards: ":
+                print header + "70"
+            elif header == "To: ":
+            	recipient = "<sip:{}>".format(to)
+                print header+recipient
+            elif header == "From: ":
+                fromLineport = "<sip:{}>".format(lineport)
+                print header+displayname+" "+fromLineport+";"
+            elif header == "Call-ID: ":
+                print header + str(callId)
+            elif header == "CSeq: ":
+                print header + str(cseq) +" "+method
+            elif header == "Contact: ":
+            	contactLineport = "<sip:{}>".format(lineport)
+                print header + contactLineport
+            elif header == "Authorization: " and authorization != 0:
+            	print header +" "+ """Digest username="{}", realm="{}", nonce="{}", uri="sip:{}", response="{}", algorithm=MD5, cnonce="{}", qop=auth, nc={}""".format()
+            elif header == "Content-Type: ":
+                print header +" "+Content_type
+            elif header == "Content-Length: ":
+                print header+" "+Content_length
         print "\r\r\r"
     
     
 
-SIP_Generator.GenerateSipMessage("INVITE")
+SIP_Generator.GenerateSipMessage("INVITE","02922401513@thevoicefactory.co.uk","UDP","02922401505@thevoicefactory.co.uk","Aaron","91.240.178.14","application/sdp","100",)
 
 
