@@ -53,6 +53,6 @@ class SIP_Generator:
     
     
 
-SIP_Generator.GenerateSipMessage("INVITE","02922401513@thevoicefactory.co.uk","UDP","02922401505@thevoicefactory.co.uk","Aaron","91.240.178.14","application/sdp","100",)
+SIP_Generator.GenerateSipMessage("INVITE","test1@proxy1.co.uk","UDP","test2@proxy2.co.uk","Aaron","1.1.1.1","application/sdp","100",)
 
 
