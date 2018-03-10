@@ -1,5 +1,8 @@
 import hashlib
-class SIP_Digest:
+class sip_digest:
+
+	def __init__(self):
+		pass
     
     def Digest_Gen(self,username,password,realm,method,bwnonce,cnonce,uri):
          count = "00000001"

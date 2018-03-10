@@ -1,0 +1,1 @@
+class Pysip_error:
