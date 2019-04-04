@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import setup,find_packages
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -13,7 +13,7 @@ setup(
     license = "BSD",
     keywords = "example documentation tutorial",
     url = "http://packages.python.org/PySIP",
-    packages=['PySIP', ],
+    packages=find_packages(),
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
