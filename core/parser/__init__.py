@@ -1,14 +1,13 @@
+from mimetools import Message
+from StringIO import StringIO
+
 class SipParser:
 
     @staticmethod
     def parse(sip_message):
-        SipParser._get_message_type(sip_message)
 
-    @staticmethod
-    def _get_headers(message):
-        for i in message:
-            pass
-
+        request_line, headers_alone = sip_message.split('\r\n', 1)
+        return Message(StringIO(headers_alone))
 
     @staticmethod
     def _get_message_type(message):
@@ -16,7 +15,7 @@ class SipParser:
 
 
 
-    def
+
 
 
 
