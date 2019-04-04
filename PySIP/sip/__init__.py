@@ -1,8 +1,8 @@
 class SipObject:
-    def __init__(self,sip_type=None,payload=None,parsed_data=None):
-        self._sip_type = sip_type
-        self._payload = payload
-        self._parsed_data = parsed_data
+    def __init__(self,):
+        self._sip_type = None
+        self._payload = None
+        self._parsed_data = None
 
 
     def get_to(self):
