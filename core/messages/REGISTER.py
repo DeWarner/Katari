@@ -1,4 +1,4 @@
-class Register:
+class R:
 
     def __init__(self):
         self.headers = 
