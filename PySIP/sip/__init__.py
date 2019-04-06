@@ -1,6 +1,6 @@
 class SipObject:
     def __init__(self,):
-        self._sip_type = None
+        self.sip_type = None
         self._payload = None
         self._parsed_data = None
 
@@ -22,3 +22,8 @@ class SipObject:
             return  self._parsed_data['via']
         except KeyError:
             return None
+
+
+    def tostring(self):
+        pass
+

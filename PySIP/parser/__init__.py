@@ -9,7 +9,7 @@ class SipParser(SipObject):
 
 
     def __repr__(self):
-        return "<{} Message instance at {}>".format(self._sip_type, hex(id(self)))
+        return "<{} Message instance at {}>".format(self.sip_type, hex(id(self)))
 
 
     def _parse(self, sip_message):
