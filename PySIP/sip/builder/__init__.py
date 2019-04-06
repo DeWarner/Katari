@@ -14,7 +14,7 @@ class SipBuilder(SipObject):
     def __init__(self):
         self._sip_message = OrderedDict()
         self.to = None
-        self.from = None
+        self.from_ = None
         self.via = None
         self.call_id = None
         self.contact = None
@@ -26,8 +26,8 @@ class SipBuilder(SipObject):
     def set_via(self, via):
         self.via = via
 
-    def set_from(self, from):
-        self.from = from
+    def set_from(self, from_):
+        self.from_ = from_
 
     def set_to(self, to):
         self.to = to

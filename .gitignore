@@ -1,4 +1,3 @@
 build/
 dist/
 PySIP.egg-info/
-setup.py

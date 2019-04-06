@@ -15,6 +15,7 @@ setup(
     url = "http://packages.python.org/PySIP",
     packages=find_packages(),
     long_description=read('README.md'),
+    scripts=['scripts/pysip-cli'],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
     ],
