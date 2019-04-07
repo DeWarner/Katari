@@ -1,4 +1,4 @@
-#PySIP
+# PySIP - Python SIP (Session Initiated Protocol) Application Framework
 
-##Basic Usage
+## Basic Usage
 blah blah 
