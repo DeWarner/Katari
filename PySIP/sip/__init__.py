@@ -27,3 +27,10 @@ class SipObject:
     def tostring(self):
         pass
 
+
+
+
+
+class SipResponse(SipObject):
+    def __init__(self):
+        pass

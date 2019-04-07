@@ -19,9 +19,9 @@ class SipParser(SipObject):
         :return:
         """
         request_line, headers_alone = sip_message.split('\r\n', 1)
-        self._sip_type = self._get_message_type(request_line)
-        self._parsed_data = Message(StringIO(headers_alone))
-        self._payload = sip_message
+        self.sip_type = self._get_message_type(request_line)
+        self.parsed_data = Message(StringIO(headers_alone))
+        self.payload = sip_message
 
 
     def _get_message_type(self, message):

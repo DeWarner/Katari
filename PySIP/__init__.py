@@ -13,7 +13,12 @@ Python SIP (Session Initiated Protocol) Application Framework
 from PySIP.server import SipServer
 
 
+
 class SipApplication:
+
+    def __call__(self, message):
+        pass
+
 
     def __init__(self):
         self._copy = False
@@ -120,5 +125,30 @@ class SipApplication:
 
 
     def run(self):
-        self.method_endpoint_register['REGISTER']()
+        server = self.start_server()
+
+
+
+
+    def start_server(self):
+        if self.config['DEBUG']:
+            print "Starting Development Server on {}:{}".format(self.config['PYSIP_HOST'], self.config['PYSIP_PORT'])
+        server = SipServer(self.config['PYSIP_HOST'], self.config['PYSIP_PORT'])
+        server.register_app(self)
+        server.start()
+
+
+    def _server_run(self, message):
+        if message.sip_type == "REGISTER":
+            self.method_endpoint_register["REGISTER"](message)
+
+
+
+
+
+
+
+
+
+
 
