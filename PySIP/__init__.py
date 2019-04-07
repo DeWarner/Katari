@@ -16,8 +16,7 @@ from PySIP.server import SipServer
 
 class SipApplication:
 
-    def __call__(self, message):
-        pass
+
 
 
     def __init__(self):

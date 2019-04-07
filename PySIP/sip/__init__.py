@@ -28,9 +28,3 @@ class SipObject:
         pass
 
 
-
-
-
-class SipResponse(SipObject):
-    def __init__(self):
-        pass
