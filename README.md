@@ -7,9 +7,7 @@
 
 ```
 
-python setup.py bdist_wheel
-
-pip install dist/PySIP-0.0.1-py2-none-any.whl
+pip install PySIPFramework 
 
 ```
 
@@ -17,7 +15,7 @@ pip install dist/PySIP-0.0.1-py2-none-any.whl
 
 ```python
 
-from PySIP import SipApplication
+from PySIPFramework import SipApplication
 
 app = SipApplication()
 
