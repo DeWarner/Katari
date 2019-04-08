@@ -1,0 +1,4 @@
+build/
+dist/
+PySIP.egg-info/
+PySIPENV/

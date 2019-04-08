@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+
+
+import argparse
+try:
+    from PySIP.managment.commands import build_project
+except ImportError:
+    print "PySIP is not installed"
+
+parser = argparse.ArgumentParser(description='PySIP Utility\'s')
+parser.add_argument("create-app", help="Create PySIP Application Structure")
+args = vars(parser.parse_args())
+
+if args['create-app']:
+
+
+
+
+
+
+
+
+
+
