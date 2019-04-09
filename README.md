@@ -1,15 +1,15 @@
-# PySIP - Python SIP (Session Initiated Protocol) Application Framework
+# Katari - SIP (Session Initiated Protocol) Application Framework
 
-[![PyPI pyversions](https://img.shields.io/pypi/status/PySIPFramework.svg)](https://pypi.org/project/PySIPFramework/)
-[![PyPI version shields.io](https://img.shields.io/pypi/v/PySIPFramework.svg)](https://pypi.python.org/pypi/PySIPFramework/)
-[![PyPI license](https://img.shields.io/pypi/l/PySIPFramework.svg)](https://pypi.python.org/pypi/PySIPFramework/)
+[![PyPI pyversions](https://img.shields.io/pypi/status/Katari.svg)](https://pypi.org/project/Katari/)
+[![PyPI version shields.io](https://img.shields.io/pypi/v/Katari.svg)](https://pypi.python.org/pypi/Katari/)
+[![PyPI license](https://img.shields.io/pypi/l/Katari.svg)](https://pypi.python.org/pypi/Katari/)
 
 
 ## installing
 
 ```
 
-pip install PySIPFramework 
+pip install Katari 
 
 ```
 
@@ -17,7 +17,7 @@ pip install PySIPFramework
 
 ```python
 
-from PySIPFramework import SipApplication
+from Katari import SipApplication
 
 app = SipApplication()
 
