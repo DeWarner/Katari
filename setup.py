@@ -5,14 +5,14 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "PySIP",
+    name = "PySIPFramework",
     version = "0.0.1",
     author = "Aaron Parfitt",
     author_email = "aaronparfitt123@gmail.com",
-    description = ("A SIP(Session Initiation Protocol) parsing library"),
+    description = ("A SIP(Session Initiation Protocol) Application Framework"),
     license = "BSD",
     keywords = "example documentation tutorial",
-    url = "http://packages.python.org/PySIP",
+    url = "http://packages.python.org/PySIPFramework",
     packages=find_packages(),
     long_description=read('README.md'),
     scripts=['scripts/pysip-cli'],
