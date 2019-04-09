@@ -10,7 +10,10 @@
 Python SIP (Session Initiated Protocol) Application Framework
 
 """
+import logging
 from Katari.server import SipServer
+from Katari.logging import KatariLogging
+
 
 
 
@@ -20,6 +23,8 @@ class KatariApplication:
 
 
     def __init__(self):
+        self.loggerinit = KatariLogging()
+        self.logger = logging.logging.getLogger(__name__)
         self._copy = False
         self.config = {"PYSIP_HOST":"127.0.0.1",
                        "PYSIP_PORT": 5060,
@@ -77,7 +82,7 @@ class KatariApplication:
 
     def start_server(self):
         if self.config['DEBUG']:
-            print "Starting Development Server on {}:{}".format(self.config['PYSIP_HOST'], self.config['PYSIP_PORT'])
+            self.logger.info("Starting Development Server on {}:{}".format(self.config['PYSIP_HOST'], self.config['PYSIP_PORT']))
         server = SipServer(self.config['PYSIP_HOST'], self.config['PYSIP_PORT'])
         server.register_app(self)
         server.start()
@@ -86,6 +91,7 @@ class KatariApplication:
     def _server_run(self, message):
         if message.sip_type == "REGISTER":
             return self.method_endpoint_register["REGISTER"](message)
+        return message
 
 
 

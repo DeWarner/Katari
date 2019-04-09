@@ -17,9 +17,9 @@ pip install Katari
 
 ```python
 
-from Katari import SipApplication
+from Katari import KatariApplication
 
-app = SipApplication()
+app = KatariApplication()
 
 app.run()
 
