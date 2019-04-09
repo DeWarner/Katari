@@ -1,5 +1,4 @@
-from rfc822 import Message
-from StringIO import StringIO
+from utils import Message
 from Katari.sip import SipObject
 
 class SipParser(SipObject):
@@ -14,14 +13,15 @@ class SipParser(SipObject):
 
     def _parse(self, sip_message):
         """
-        Takes in a sip message and
+        Takes in a sip message
+
         :param sip_message:
         :return:
         """
-        request_line, headers_alone = sip_message.split('\r\n', 1)
-        self.sip_type = self._get_message_type(request_line)
-        self.parsed_data = Message(StringIO(headers_alone))
+
+        self.parsed_data = Message(message=sip_message)
         self.payload = sip_message
+        self.sip_type = self.parsed_data.sip_type
 
 
     def _get_message_type(self, message):

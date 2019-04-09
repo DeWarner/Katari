@@ -14,7 +14,7 @@ from Katari.server import SipServer
 
 
 
-class SipApplication:
+class KatariApplication:
 
 
 
@@ -25,7 +25,8 @@ class SipApplication:
                        "PYSIP_PORT": 5060,
                        "PYSIP_BACKEND": None,
                        "PROTOCOL": None,
-                       "DEBUG": True
+                       "DEBUG": True,
+                       "LOGGING": ""
                        }
 
         self.method_endpoint_register = {"INVITE":None,
@@ -56,33 +57,10 @@ class SipApplication:
             return f
         return decorator
 
-    def ack(self):
-        def decorator(f):
-            self.method_endpoint_register['ACK'] = f
-            return f
-        return decorator
-
-    def bye(self):
-        def decorator(f):
-            self.method_endpoint_register['BYE'] = f
-            return f
-        return decorator
-
-    def cancel(self):
-        def decorator(f):
-            self.method_endpoint_register['CANCEL'] = f
-            return f
-        return decorator
 
     def options(self):
         def decorator(f):
             self.method_endpoint_register['OPTIONS'] = f
-            return f
-        return decorator
-
-    def prack(self):
-        def decorator(f):
-            self.method_endpoint_register['PRACK'] = f
             return f
         return decorator
 
@@ -92,41 +70,9 @@ class SipApplication:
             return f
         return decorator
 
-    def notify(self):
-        def decorator(f):
-            self.method_endpoint_register['NOTIFY'] = f
-            return f
-        return decorator
-
-    def publish(self):
-        def decorator(f):
-            self.method_endpoint_register['PUBLISH'] = f
-            return f
-        return decorator
-
-    def info(self):
-        def decorator(f):
-            self.method_endpoint_register['INFO'] = f
-            return f
-        return decorator
-
-    def refrer(self):
-        def decorator(f):
-            self.method_endpoint_register['REFER'] = f
-            return f
-        return decorator
-
-    def update(self):
-        def decorator(f):
-            self.method_endpoint_register['REFER'] = f
-            return f
-        return decorator
-
 
     def run(self):
         server = self.start_server()
-
-
 
 
     def start_server(self):
@@ -139,7 +85,7 @@ class SipApplication:
 
     def _server_run(self, message):
         if message.sip_type == "REGISTER":
-            self.method_endpoint_register["REGISTER"](message)
+            return self.method_endpoint_register["REGISTER"](message)
 
 
 
