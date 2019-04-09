@@ -5,7 +5,7 @@ Sip Builder class
 builds OrderedDict and create string based off rfc 2822 syntax which sip follows
 """
 
-from PySIP.sip import SipObject
+from Katari.sip import SipObject
 from collections import OrderedDict
 
 

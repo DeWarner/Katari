@@ -1,6 +1,6 @@
 from rfc822 import Message
 from StringIO import StringIO
-from PySIP.sip import SipObject
+from Katari.sip import SipObject
 
 class SipParser(SipObject):
 

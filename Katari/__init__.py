@@ -10,7 +10,7 @@
 Python SIP (Session Initiated Protocol) Application Framework
 
 """
-from PySIP.server import SipServer
+from Katari.server import SipServer
 
 
 

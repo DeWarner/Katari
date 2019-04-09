@@ -1,4 +1,4 @@
-from PySIP.sip import SipObject
+from Katari.sip import SipObject
 
 
 

@@ -1,5 +1,5 @@
 import socket
-from PySIP.sip.parser import SipParser
+from Katari.sip.parser import SipParser
 
 class SipServer:
 

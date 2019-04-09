@@ -1,0 +1,25 @@
+#!/usr/bin/python
+
+
+
+import argparse
+try:
+    from Katari.managment.commands import build_project
+except ImportError:
+    print "Katari is not installed"
+
+parser = argparse.ArgumentParser(description='Katari Utility\'s')
+parser.add_argument("create-app", help="Create Katari Application Structure")
+args = vars(parser.parse_args())
+
+if args['create-app']:
+
+
+
+
+
+
+
+
+
+
