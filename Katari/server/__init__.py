@@ -1,5 +1,5 @@
 import socket
-from Katari.sip.parser import SipParser
+from Katari.sip import SipMessage
 
 class SipServer:
 
@@ -20,8 +20,8 @@ class SipServer:
     def listener(self):
         while True:
             data = self.socket.recvfrom(1024)
-            response = self.application._server_run(self.parse_sip(data[0]))
-            self.socket.sendto(response.payload,data[1])
+            response = self.application._server_run(SipMessage(data[0]))
+            self.socket.sendto(response.export().encode(),data[1])
 
 
     def register_app(self,app):
