@@ -23,7 +23,9 @@ class NotFound404(SipMessage):
 
 class MethodNotAllowed405(SipMessage):
     def __init__(self):
-        pass
+        super().__init__()
+        self.method_line = "SIP/2.0 405 Method Not Allowed\r\n"
+
 
 class NotAcceptable406(SipMessage):
     def __init__(self):

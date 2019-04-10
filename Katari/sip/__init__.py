@@ -3,7 +3,6 @@ from .utils import Message
 class SipMessage(Message):
     def __init__(self,message=None):
         super().__init__(message=message)
-        self.sip_type = None
         self._payload = None
 
 
@@ -43,6 +42,9 @@ class SipMessage(Message):
     def set_allow(self, allow):
         self._data['allow'] = allow
 
+    def set_cseq(self,cseq):
+        self._data['cseq'] = cseq
+
     def set_message_type(self, message_type):
         self.sip_type = message_type
 
@@ -53,18 +55,21 @@ class SipMessage(Message):
         for k,v in self._data.items():
             line = k.capitalize() + ": " + v
             message = message + line + "\r\n"
-            print(line)
         message = message + "\r\n"
         return message
 
 
     def create_response(self,message=None):
-        message.set_via(self._data['via'])
-        message.set_from(self._data['from'])
-        message.set_to(self._data['to'])
-        message.set_contact(self._data['contact'])
-        message.set_call_id(self._data['call-id'])
-        return message
+        try:
+             message.set_via(self._data['via'])
+             message.set_from(self._data['from'])
+             message.set_to(self._data['to'])
+             message.set_contact(self._data['contact'])
+             message.set_call_id(self._data['call-id'])
+             message.set_cseq(self._data['cseq'])
+             return message
+        except:
+            return message
 
 
 

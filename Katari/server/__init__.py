@@ -20,8 +20,10 @@ class SipServer:
     def listener(self):
         while True:
             data = self.socket.recvfrom(1024)
-            response = self.application._server_run(SipMessage(data[0]))
-            self.socket.sendto(response.export().encode(),data[1])
+            message = SipMessage(data[0])
+            if message.sip_type != None:
+                response = self.application._server_run(message)
+                self.socket.sendto(response.export().encode(),data[1])
 
 
     def register_app(self,app):

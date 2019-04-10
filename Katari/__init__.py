@@ -13,6 +13,8 @@ Python SIP (Session Initiated Protocol) Application Framework
 import logging
 from Katari.server import SipServer
 from Katari.logging import KatariLogging
+from Katari.sip.response._4xx import MethodNotAllowed405
+from Katari.sip.response import NullMessage
 
 
 
@@ -34,20 +36,20 @@ class KatariApplication:
                        "LOGGING": ""
                        }
 
-        self.method_endpoint_register = {"INVITE":None,
-                                         "ACK": None,
-                                         "BYE": None,
-                                         "CANCEL": None,
-                                         "REGISTER": None,
-                                         "OPTIONS": None,
-                                         "PRACK": None,
-                                         "SUBSCRIBE": None,
-                                         "NOTIFY": None,
-                                         "PUBLISH": None,
-                                         "INFO": None,
-                                         "REFER": None,
-                                         "MESSAGE": None,
-                                         "UPDATE": None}
+        self.method_endpoint_register = {"INVITE":self.default_response,
+                                         "ACK": self.null_response,
+                                         "BYE": self.default_response,
+                                         "CANCEL": self.default_response,
+                                         "REGISTER": self.default_response,
+                                         "OPTIONS": self.default_response,
+                                         "PRACK": self.default_response,
+                                         "SUBSCRIBE": self.default_response,
+                                         "NOTIFY": self.default_response,
+                                         "PUBLISH": self.default_response,
+                                         "INFO": self.default_response,
+                                         "REFER": self.default_response,
+                                         "MESSAGE": self.default_response,
+                                         "UPDATE": self.default_response}
 
 
     def register(self):
@@ -89,9 +91,23 @@ class KatariApplication:
 
 
     def _server_run(self, message):
+        print(message.sip_type)
         if message.sip_type == "REGISTER":
             return self.method_endpoint_register["REGISTER"](message)
-        return message
+        elif message.sip_type == "INVITE":
+            return self.method_endpoint_register["INVITE"](message)
+        elif message.sip_type == "ACK":
+            return self.method_endpoint_register["ACK"](message)
+
+
+
+
+    def default_response(self,request):
+        return request.create_response(MethodNotAllowed405())
+
+    def null_response(self, request):
+        return request.create_response(NullMessage())
+
 
 
 
