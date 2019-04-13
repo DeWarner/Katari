@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "Katari",
-    version = "0.0.1",
+    version = "0.0.2",
     author = "Aaron Parfitt",
     author_email = "aaronparfitt123@gmail.com",
     description = ("A SIP(Session Initiation Protocol) Application Framework"),
@@ -18,6 +18,7 @@ setup(
     scripts=['scripts/katari-cli'],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.7",
+        "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
 )

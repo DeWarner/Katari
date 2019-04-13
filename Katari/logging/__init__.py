@@ -1,8 +1,9 @@
 import logging
+import sys
 
-class PySIPLogging:
+class KatariLogging:
 
     def __init__(self):
-        logging.getLogger(__name__)
+       log = logging.basicConfig(stream=sys.stdout)
 
 

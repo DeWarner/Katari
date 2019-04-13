@@ -17,9 +17,15 @@ pip install Katari
 
 ```python
 
-from Katari import SipApplication
+from Katari import KatariApplication
+from Katari.sip.response._2xx import OK200
 
-app = SipApplication()
+app = KatariApplication()
+
+@app.register()
+def do_register(request):
+     return request.create_response(OK200())
+
 
 app.run()
 
