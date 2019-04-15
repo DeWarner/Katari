@@ -15,7 +15,7 @@ setup(
     url = "http://packages.python.org/Katari",
     packages=find_packages(),
     long_description=read('README.md'),
-    scripts=['scripts/katari-cli'],
+    scripts=['scripts/katari'],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Programming Language :: Python :: 3.7",

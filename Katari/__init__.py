@@ -1,13 +1,13 @@
 """
-########  ##    ##  ######  #### ########
-##     ##  ##  ##  ##    ##  ##  ##     ##
-##     ##   ####   ##        ##  ##     ##
-########     ##     ######   ##  ########
-##           ##          ##  ##  ##
-##           ##    ##    ##  ##  ##
-##           ##     ######  #### ##
+##    ##    ###    ########    ###    ########  ####
+##   ##    ## ##      ##      ## ##   ##     ##  ##
+##  ##    ##   ##     ##     ##   ##  ##     ##  ##
+#####    ##     ##    ##    ##     ## ########   ##
+##  ##   #########    ##    ######### ##   ##    ##
+##   ##  ##     ##    ##    ##     ## ##    ##   ##
+##    ## ##     ##    ##    ##     ## ##     ## ####
 
-Python SIP (Session Initiated Protocol) Application Framework
+SIP (Session Initiated Protocol) Application Framework
 
 """
 import logging
@@ -107,6 +107,9 @@ class KatariApplication:
 
     def null_response(self, request):
         return request.create_response(NullMessage())
+
+    def get_settings(self):
+        pass
 
 
 
