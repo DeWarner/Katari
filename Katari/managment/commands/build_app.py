@@ -1,6 +1,6 @@
 from Katari.managment.commands import BaseCommand
 
-class BuildProject(BaseCommand):
+class BuildApp(BaseCommand):
 
     command = "create-app"
     help = "Test"

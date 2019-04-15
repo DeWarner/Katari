@@ -1,0 +1,3 @@
+class NoBaseCommandClass(Exception):
+    pass
+
