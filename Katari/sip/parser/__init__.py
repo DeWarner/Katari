@@ -11,23 +11,7 @@ class SipParser:
         Takes in a sip message
 
         :param sip_message:
-        :return:
+        :return: dict
         """
 
         return SipMessage(message=sip_message)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
