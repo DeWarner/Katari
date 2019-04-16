@@ -1,22 +1,23 @@
-"""
->>> a = ParsedMessage.parse("<sip:cal3254@192.234.1.12:5060;transport=udp>")
->>> a.get("port")
-5060
->>> a.get("address")
-'cal3254@192.234.1.12'
->>> a.get("transport")
-'udp'
-"""
+
 from Katari.sip import SipMessage
 
 
 class ParsedMessage:
     def __init__(self, message):
+        """
+        >>> a = ParsedMessage("<sip:cal3254@192.234.1.12:5060;transport=udp>")
+        >>> a.port
+        5060
+        >>> a.address
+        'cal3254@192.234.1.12'
+        >>> a.transport
+        'udp'
+        """
         self.message = message
         self.info = self.parse(message)
-        self.port = info.get("port")
-        self.transport = info.get("transport")
-        self.address = info.get("address")
+        self.port = self.info.get("port")
+        self.transport = self.info.get("transport")
+        self.address = self.info.get("address")
         
 
     @staticmethod
@@ -25,6 +26,13 @@ class ParsedMessage:
         Takes in a sip message
         :param sip_message:
         :return: dict
+        >>> a = ParsedMessage.parse("<sip:cal3254@192.234.1.12:5060;transport=udp>")
+        >>> a.get("port")
+        5060
+        >>> a.get("address")
+        'cal3254@192.234.1.12'
+        >>> a.get("transport")
+        'udp'
         """
         message = sip_message[5:-1]
         # cal3254@192.234.1.12:5060;transport=udp
