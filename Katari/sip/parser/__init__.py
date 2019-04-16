@@ -1,11 +1,14 @@
 from Katari.sip import SipMessage
 
 
-class ParsedMessage:
+class SipMessage:
     def __init__(message):
         self.message = message
-        self.info = parse(message)
-
+        info = parse(message)
+        self.port = info.get("port")
+        self.transport = info.get("transport")
+        self.address = info.get("address")
+        
 
 def parse(sip_message):
     """
@@ -30,19 +33,3 @@ def parse(sip_message):
     transport = tp.split("=")[1]
     address, port = loc.split(":")
     return dict(address=address, port=port, transport=transport)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
