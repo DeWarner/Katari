@@ -1,7 +1,3 @@
-
-from Katari.sip import SipMessage
-
-
 class ParsedMessage:
     def __init__(self, message):
         """
