@@ -13,16 +13,15 @@ class CommandParser:
     def __init__(self):
         self.logger = KatariLogging().get_logger()
         self._load_commands()
-        #print os.path.join(os.path.dirname(__file__),"commands")
-        #parse = argparse.ArgumentParser(description='Katari Utility\'s')
-        #parser.add_argument("create-app", help="Create katari application
-        # structure")
-        #args = vars(parser.parse_args())
 
     def parse(self,command):
         pass
 
     def _load_commands(self):
+        """
+        loads/imports all commands from the commands submodule, works as a "plugin"
+        :return:
+        """
         path = os.path.join(os.path.dirname(__file__), "commands")
         command_list = [command.replace(".py","") for command in os.listdir(path)
                         if not (command.startswith("_") or command.endswith(".pyc"))]
@@ -39,14 +38,26 @@ class CommandParser:
 
 
     def _register_command(self,command_loc):
+        """
+        Registers command matched with command name derived from said command class
+
+        :param command_loc:
+        :return:
+        """
         self.logger.info("Registering {}".format(command_loc))
-        if not self._validate_command(dir(sys.modules[command_loc])):
-            raise NoBaseCommandClass("No Base Class Detected")
+        self._validate_command(dir(sys.modules[command_loc]))
+
 
 
 
     def _validate_command(self, classes):
+        """
+        Checks if command has BaseCommand as a parent
+
+        :param classes:
+        :return:
+        """
         if "BaseCommand" in classes:
             return True
-        return False
+        raise NoBaseCommandClass("No Base Class Detected")
 

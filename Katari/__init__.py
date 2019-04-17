@@ -15,6 +15,7 @@ from Katari.server import SipServer
 from Katari.logging import KatariLogging
 from Katari.sip.response._4xx import MethodNotAllowed405
 from Katari.sip.response import NullMessage
+from Katari.errors import NoSettingsFound
 
 
 
@@ -24,18 +25,13 @@ class KatariApplication:
 
 
 
-    def __init__(self):
+    def __init__(self,settings=None):
         self.loggerinit = KatariLogging()
         self.logger = logging.logging.getLogger(__name__)
         self._copy = False
-        self.config = {"PYSIP_HOST":"127.0.0.1",
-                       "PYSIP_PORT": 5060,
-                       "PYSIP_BACKEND": None,
-                       "PROTOCOL": None,
-                       "DEBUG": True,
-                       "LOGGING": ""
-                       }
-
+        self.settings = settings
+        self.send_q = None
+        self.revc_q = None
         self.method_endpoint_register = {"INVITE":self.default_response,
                                          "ACK": self.null_response,
                                          "BYE": self.default_response,
@@ -52,11 +48,26 @@ class KatariApplication:
                                          "UPDATE": self.default_response}
 
 
+
     def register(self):
         def decorator(f):
             self.method_endpoint_register['REGISTER'] = f
+            self
             return f
         return decorator
+
+    def ack(self):
+        def decorator(f):
+            self.method_endpoint_register['ACK'] = f
+            return f
+        return decorator
+
+    def cancel(self):
+        def decorator(f):
+            self.method_endpoint_register['CANCEL'] = f
+            return f
+        return decorator
+
 
     def invite(self):
         def decorator(f):
@@ -83,9 +94,9 @@ class KatariApplication:
 
 
     def start_server(self):
-        if self.config['DEBUG']:
-            self.logger.info("Starting Development Server on {}:{}".format(self.config['PYSIP_HOST'], self.config['PYSIP_PORT']))
-        server = SipServer(self.config['PYSIP_HOST'], self.config['PYSIP_PORT'])
+        if self.settings['DEBUG']:
+            self.logger.info("Starting Development Server on {}:{}".format(self.settings['PYSIP_HOST'], self.settings['PYSIP_PORT']))
+        server = SipServer(self.settings['PYSIP_HOST'], self.settings['PYSIP_PORT'])
         server.register_app(self)
         server.start()
 
@@ -110,6 +121,11 @@ class KatariApplication:
 
     def get_settings(self):
         pass
+
+    def set_queues(self,send_q,recv_q):
+        self.send_q = send_q
+        self.revc_q = recv_q
+
 
 
 
