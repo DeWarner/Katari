@@ -1,8 +1,8 @@
 #!/usr/bin/python
-from Katari.managment import CommandParser
+from Katari.managment import CommandInterface
 
 
-parser = CommandParser()
+parser = CommandInterface()
 parser.parse()
 
 
