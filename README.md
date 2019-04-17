@@ -24,7 +24,7 @@ app = KatariApplication()
 
 @app.register()
 def do_register(request):
-     return request.create_response(OK200())
+     app.send_response(request.create_response(OK200()))
 
 
 app.run()

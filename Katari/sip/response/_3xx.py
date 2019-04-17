@@ -3,7 +3,8 @@ from Katari.sip import SipMessage
 
 class MultipleChoices300(SipMessage):
     def __init__(self):
-        pass
+        super().__init__()
+        self.method_line = "SIP/2.0 300 Multiple Choices\r\n"
 
 class MovedPermanently301(SipMessage):
     def __init__(self):
@@ -11,7 +12,8 @@ class MovedPermanently301(SipMessage):
 
 class MovedTemporarily302(SipMessage):
     def __init__(self):
-        pass
+        super().__init__()
+        self.method_line = "SIP/2.0 302 Moved Temporarily\r\n"
 
 class UseProxy305(SipMessage):
     def __init__(self):
