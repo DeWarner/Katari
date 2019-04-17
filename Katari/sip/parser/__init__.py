@@ -1,7 +1,7 @@
-class ParsedMessage:
+class SipURI:
     def __init__(self, message):
         """
-        >>> a = ParsedMessage("<sip:cal3254@192.234.1.12:5060;transport=udp>")
+        >>> a = SipURI("<sip:cal3254@192.234.1.12:5060;transport=udp>")
         >>> a.port
         5060
         >>> a.address
@@ -22,7 +22,7 @@ class ParsedMessage:
         Takes in a sip message
         :param sip_message:
         :return: dict
-        >>> a = ParsedMessage.parse("<sip:cal3254@192.234.1.12:5060;transport=udp>")
+        >>> a = SipURI.parse("<sip:cal3254@192.234.1.12:5060;transport=udp>")
         >>> a.get("port")
         5060
         >>> a.get("address")
