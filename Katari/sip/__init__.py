@@ -1,4 +1,6 @@
-from .utils import Message
+import re
+from .utils import Message, SipURI
+
 
 class SipMessage(Message):
     def __init__(self,message=None):
@@ -8,7 +10,7 @@ class SipMessage(Message):
 
     def get_to(self):
         try:
-            return self._data['to']
+            return SipURI(self._data['to']).address
         except KeyError:
             return None
 
@@ -51,7 +53,7 @@ class SipMessage(Message):
 
     def export(self):
         message = ""
-        message = message + self.method_line
+        message = message + self.method_line + "\r\n"
         for k,v in self._data.items():
             line = k.capitalize() + ": " + v
             message = message + line + "\r\n"
