@@ -7,7 +7,6 @@ class UDPSipServer(socketserver.DatagramRequestHandler):
 
     application = None
 
-
     def handle(self):
         """
 
@@ -17,8 +16,7 @@ class UDPSipServer(socketserver.DatagramRequestHandler):
         message = SipMessage(datagram)
         UDPSipServer.application.socket = self.request
         UDPSipServer.application.client = self.client_address
-        UDPSipServer.application._server_run(message , self.client_address)
-
+        UDPSipServer.application._server_run(message, self.client_address)
 
     @staticmethod
     def start(ServerAddress, applcation):

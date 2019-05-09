@@ -1,82 +1,92 @@
+"""
+Utils module containing all sip header classes
+"""
 from collections import OrderedDict
 import re
 
-class Message:
 
+class Message:
+    """
+    Base message
+    """
     def __init__(self, message):
         self.raw_message = message
         self._data = OrderedDict()
-        if message != None:
-            self.method_line, self.headers = message.decode().split('\r\n', 1)
+        if message:
+            self.method_line, self.headers = message.decode().split("\r\n", 1)
             self._parser(self.headers)
             self.sip_type = self.get_method(self.method_line)
 
-
     def __getitem__(self, item):
+        """
+        :param item:
+        :return:
+        """
         try:
             return self._data[item]
         except KeyError:
             return None
 
-
     def _parser(self, message):
-         for line in message.split("\r\n"):
-             try:
-                  header, data = line.split(": ")
-                  self._data[header.lower()] = data
-             except Exception as e:
-                 pass
+        """
+        :param message:
+        :return:
+        """
+        for line in message.split("\r\n"):
+            try:
+                header, data = line.split(": ")
+                self._data[header.lower()] = data
+            except Exception as err:
+                pass
 
     def get_method(self, methodline):
+        """
+        :param methodline:
+        :return:
+        """
         try:
             return methodline.split()[0]
         except:
             pass
 
 
-class SipURI:
-    def __init__(self, message):
-        """
-        >>> a = SipURI("<sip:cal3254@192.234.1.12:5060;transport=udp>")
-        >>> a.port
-        5060
-        >>> a.address
-        'cal3254@192.234.1.12'
-        >>> a.transport
-        'udp'
-        """
+class URI:
+    """
+
+    """
+    def __init__(self, uri):
+        self.uri = uri
         self.address = re.search("sip:(.*)@(.*)(?=;)", message).group(0)
+        self.user = re.search("sip:(.*)@(.*)(?=;)", message).group(1)
 
-        #self.message = message
-        #self.info = self.parse(message)
-        #self.port = self.info.get("port")
-        #self.transport = self.info.get("transport")
-        #self.address = self.info.get("address")
+    def __repr__(self) :
+        return self.uri
 
-    @staticmethod
-    def parse(sip_message):
-        """
-        Takes in a sip message
-        :param sip_message:
-        :return: dict
-        >>> a = SipURI.parse("<sip:cal3254@192.234.1.12:5060;transport=udp>")
-        >>> a.get("port")
-        5060
-        >>> a.get("address")
-        'cal3254@192.234.1.12'
-        >>> a.get("transport")
-        'udp'
-        """
-        message = sip_message[5:-1]
-        # cal3254@192.234.1.12:5060;transport=udp
-        if sip_message[:5] != "<sip:":
-            raise Exception("tis not a sip message? :(")
-        loc, tp = message.split(";")
-        transport = tp.split("=")[1]
-        address, port = loc.split(":")
-        return dict(address=address, port=int(port), transport=transport)
+    def get_address(self):
+        return self.address
+
+    def get_user(self):
+        return self.user
 
 
-class AllowType:
+class Allow:
     def __init__(self):
         pass
+
+class Via:
+    def __init__(self):
+        pass
+
+class CallId:
+    def __init__(self):
+        pass
+
+class From:
+    def __init__(self):
+        pass
+
+class To:
+    def __init__(self):
+        pass
+
+

@@ -9,12 +9,11 @@ from Katari.errors import NoBaseCommandClass
 
 
 class CommandParser:
-
     def __init__(self):
         self.logger = KatariLogging().get_logger()
         self._load_commands()
 
-    def parse(self,command):
+    def parse(self, command):
         pass
 
     def _load_commands(self):
@@ -24,19 +23,20 @@ class CommandParser:
         :return:
         """
         path = os.path.join(os.path.dirname(__file__), "commands")
-        command_list = [command.replace(".py","") for command in os.listdir(path)
-                        if not (command.startswith("_") or command.endswith(".pyc"))]
+        command_list = [
+            command.replace(".py", "")
+            for command in os.listdir(path)
+            if not (command.startswith("_") or command.endswith(".pyc"))
+        ]
         print(command_list)
         for filtered_command in command_list:
             import_module("Katari.managment.commands." + filtered_command)
             self._register_command("Katari.managment.commands." + filtered_command)
 
-
     def _find_commands(self):
         pass
 
-
-    def _register_command(self,command_loc):
+    def _register_command(self, command_loc):
         """
         Registers command matched with command name derived from said command class
 
@@ -45,9 +45,6 @@ class CommandParser:
         """
         self.logger.info("Registering {}".format(command_loc))
         self._validate_command(dir(sys.modules[command_loc]))
-
-
-
 
     def _validate_command(self, classes):
         """
@@ -63,20 +60,13 @@ class CommandParser:
 
 
 class CommandInterface:
-
     def __init__(self):
         self.parser = argparse.ArgumentParser(description="Katari Command-line tools")
-        self.parser.add_argument("-run-app",help="start katari application",required=False)
+        self.parser.add_argument(
+            "-run-app", help="start katari application", required=False
+        )
         self.args = vars(self.parser.parse_args())
         self.run()
 
-
     def run(self):
         print(self.args)
-
-
-
-
-
-
-
