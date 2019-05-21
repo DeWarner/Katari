@@ -3,7 +3,7 @@ from Katari.managment import CommandInterface
 
 
 parser = CommandInterface()
-parser.parse()
+parser.run()
 
 
 

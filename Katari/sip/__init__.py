@@ -1,5 +1,4 @@
-import re
-from .utils import Message, SipURI
+from Katari.sip.utils import Message, URI
 
 
 class SipMessage(Message):
@@ -9,7 +8,7 @@ class SipMessage(Message):
 
     def get_to(self):
         try:
-            return SipURI(self._data["to"])
+            return URI(self._data["to"])
         except KeyError:
             return None
 

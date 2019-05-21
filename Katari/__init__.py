@@ -24,20 +24,14 @@ class KatariApplication(UDPSipServer):
     Katari instance is the main
     """
     def __init__(self, settings=None):
-        if settings:
-            self.settings = {
-                "HOST": "0.0.0.0",
-                "PORT": 5060,
-                "PROTOCOL": None,
-                "DEBUG": True,
-                "LOGGING": "",
-                "LOGFILE": "Katari.log",
-                "LOGDIR": "",
-            }
+        if not settings:
+            from Katari.template import settings
+            self.settings = settings
         else:
             self.settings = settings
+        UDPSipServer.settings = settings
 
-        self.loggerinit = KatariLogging(filename=self.settings["LOGFILE"])
+        self.loggerinit = KatariLogging(filename=self.settings.KATARI_LOGGING['LOGFILE'])
         self.logger = self.loggerinit.get_logger()
         self._copy = False
         self.socket = None
@@ -103,6 +97,14 @@ class KatariApplication(UDPSipServer):
 
         return decorator
 
+    def info(self):
+        def decorator(f):
+            self.method_endpoint_register["INFO"] = f
+            return f
+
+        return decorator
+
+
     def status_response(self):
         def decorator(f):
             self.method_endpoint_register["RESPONSE"] = f
@@ -110,15 +112,16 @@ class KatariApplication(UDPSipServer):
 
         return decorator
 
+
     def run(self):
         try:
             self.logger.info(
                 "Starting Server on {}:{}".format(
-                    self.settings["HOST"], self.settings["PORT"]
+                    self.settings.HOST, self.settings.PORT
                 )
             )
             KatariApplication.start(
-                (self.settings["HOST"], self.settings["PORT"]), self
+                (self.settings.HOST, self.settings.PORT), self
             )
         except KeyboardInterrupt:
             self.logger.info("Stopping Server")

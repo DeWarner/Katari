@@ -6,12 +6,17 @@ from Katari.sip import SipMessage
 class UDPSipServer(socketserver.DatagramRequestHandler):
 
     application = None
+    settings = None
 
     def handle(self):
         """
 
         :return:
         """
+
+        if UDPSipServer.check_allowed(self.client_address[0]):
+            return
+
         datagram = self.rfile.read()
         message = SipMessage(datagram)
         UDPSipServer.application.socket = self.request
@@ -27,6 +32,17 @@ class UDPSipServer(socketserver.DatagramRequestHandler):
         :param applcation:
         :return:
         """
+
         UDPSipServer.application = applcation
         UDPServerObject = socketserver.ForkingUDPServer(ServerAddress, UDPSipServer)
         UDPServerObject.serve_forever()
+
+
+    @staticmethod
+    def check_allowed(address):
+        if len(UDPSipServer.settings.ALLOWED_HOSTS) <= 0:
+            return True
+        elif address in UDPSipServer.settings.ALLOWED_HOSTS:
+            return True
+        return False
+

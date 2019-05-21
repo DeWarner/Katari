@@ -56,8 +56,8 @@ class URI:
     """
     def __init__(self, uri):
         self.uri = uri
-        self.address = re.search("sip:(.*)@(.*)(?=;)", message).group(0)
-        self.user = re.search("sip:(.*)@(.*)(?=;)", message).group(1)
+        self.address = re.search("sip:(.*)@(.*)(?=;)", uri).group(0)
+        self.user = re.search("sip:(.*)@(.*)(?=;)", uri).group(1)
 
     def __repr__(self) :
         return self.uri
