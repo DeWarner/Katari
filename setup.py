@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name = "Katari",
-    version = "0.0.4",
+    version = "0.0.6",
     author = "Aaron Parfitt",
     author_email = "aaronparfitt123@gmail.com",
     description = ("A SIP(Session Initiation Protocol) Application Framework"),

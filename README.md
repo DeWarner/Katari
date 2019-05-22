@@ -5,7 +5,7 @@
 [![PyPI license](https://img.shields.io/pypi/l/Katari.svg)](https://pypi.python.org/pypi/Katari/)
 
 
-## installing
+## Installing
 
 ```
 
@@ -13,8 +13,18 @@ pip install Katari
 
 ```
 
-## An Example
+## Getting Started
 
+to create a katari project run the following command in your terminal
+
+```bash
+
+katari --build_app <project name>
+
+```
+
+
+####app.py
 ```python
 
 from Katari import KatariApplication
