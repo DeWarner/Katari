@@ -33,7 +33,7 @@ class BuildApp(BaseCommand):
             return "fuck"
 
     def _valid_project_name(self, directory):
-        if directory == "build_app":
+        if directory == "build-app":
             return False
         return True
 
