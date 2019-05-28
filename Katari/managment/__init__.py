@@ -64,7 +64,7 @@ class CommandInterface:
     def __init__(self):
         self.parser = argparse.ArgumentParser(description="Katari Command-line tools")
         self.parser.add_argument(
-            "--build_app", help="builds project template"
+            "--build-app", help="builds project template"
         )
         self.args = vars(self.parser.parse_args())
 
