@@ -1,3 +1,5 @@
+![alt text](https://github.com/hyperioxx/Katari/blob/master/Katari.png "Katari Logo")
+
 # Katari - SIP (Session Initiated Protocol) Application Framework
 
 [![PyPI pyversions](https://img.shields.io/pypi/status/Katari.svg)](https://pypi.org/project/Katari/)
