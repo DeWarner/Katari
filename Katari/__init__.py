@@ -30,8 +30,8 @@ class KatariApplication(UDPSipServer):
         else:
             self.settings = settings
         UDPSipServer.settings = settings
-
-        self.loggerinit = KatariLogging(filename=self.settings.KATARI_LOGGING['LOGFILE'])
+        if 
+        self.loggerinit = KatariLogging(filename=self.settings.KATARI_LOGGING['LOGFILE'], output_mode=self.settings.KATARI_LOGGING['OUTPUTMODE'])
         self.logger = self.loggerinit.get_logger()
         self._copy = False
         self.socket = None
