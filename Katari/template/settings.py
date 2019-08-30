@@ -6,5 +6,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 USER_AGENT = "Katari Server 0.0.6"
 DEV_SERVER = False
 KATARI_LOGGING = {"LOGFILE" :"Katari.log",
-                  "LEVEL": "INFO"}
+                  "LEVEL": "INFO", 
+                  "OUTPUTMODE": "file"
+                  }
 
