@@ -65,7 +65,6 @@ class SipMessage(Message):
             self.set_contact(message["contact"])
             self.set_call_id(message["call-id"])
             self.set_cseq(message["cseq"])
-            return message
+            return self.export()
         except Exception as e:
-            
-            return message
+            return self.export()
