@@ -59,12 +59,13 @@ class SipMessage(Message):
 
     def create_response(self, message=None):
         try:
-            message.set_via(self._data["via"])
-            message.set_from(self._data["from"])
-            message.set_to(self._data["to"])
-            message.set_contact(self._data["contact"])
-            message.set_call_id(self._data["call-id"])
-            message.set_cseq(self._data["cseq"])
+            self.set_via(message["via"])
+            self.set_from(message["from"])
+            self.set_to(message["to"])
+            self.set_contact(message["contact"])
+            self.set_call_id(message["call-id"])
+            self.set_cseq(message["cseq"])
             return message
-        except:
+        except Exception as e:
+            
             return message

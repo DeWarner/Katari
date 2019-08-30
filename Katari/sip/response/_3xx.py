@@ -18,6 +18,7 @@ class MovedTemporarily302(SipMessage):
         self.method_line = "SIP/2.0 302 Moved Temporarily\r\n"
 
 
+
 class UseProxy305(SipMessage):
     def __init__(self):
         pass

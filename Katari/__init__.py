@@ -129,7 +129,7 @@ class KatariApplication(UDPSipServer):
     def _server_run(self, message, client):
         if message.sip_type == "REGISTER":
             try:
-                self.logger.debug(
+                self.logger.info(
                     "Received REGISTER request from {} ".format(client[0])
                 )
                 self.logger.debug("\n\n" + message.export())
@@ -138,28 +138,28 @@ class KatariApplication(UDPSipServer):
                 self.logger.error(err)
         elif message.sip_type == "INVITE":
             try:
-                self.logger.debug("Received INVITE from {} ".format(client[0]))
+                self.logger.info("Received INVITE from {} ".format(client[0]))
                 self.logger.debug("\n\n" + message.export())
                 self.method_endpoint_register["INVITE"](message, client)
             except Exception as err:
                 self.logger.error(err)
         elif message.sip_type == "OPTIONS":
             try:
-                self.logger.debug("Received OPTIONS from {} ".format(client[0]))
+                self.logger.info("Received OPTIONS from {} ".format(client[0]))
                 self.logger.debug("\n\n" + message.export())
                 self.method_endpoint_register["OPTIONS"](message, client)
             except Exception as err:
                 self.logger.error(err)
         elif message.sip_type == "CANCEL":
             try:
-                self.logger.debug("Received CANCEL from {} ".format(client[0]))
+                self.logger.info("Received CANCEL from {} ".format(client[0]))
                 self.logger.debug("\n\n" + message.export())
                 self.method_endpoint_register["CANCEL"](message, client)
             except Exception as err:
                 self.logger.error(err)
         else:
             try:
-                self.logger.debug("Received response from {} ".format(client[0]))
+                self.logger.info("Received response from {} ".format(client[0]))
                 self.logger.debug("\n\n" + message.export())
                 self.method_endpoint_register["RESPONSE"](message, client)
             except Exception as err:
@@ -175,7 +175,7 @@ class KatariApplication(UDPSipServer):
         return request.create_response(NullMessage())
 
     def send(self, message, client):
-        self.logger.debug("Sending response to {} ".format(client[0]))
+        self.logger.info("Sending response to {} ".format(client[0]))
         self.logger.debug("\n\n" + message.export())
         self.socket[1].sendto(message.export().encode(), client)
 

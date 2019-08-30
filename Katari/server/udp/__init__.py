@@ -14,7 +14,7 @@ class UDPSipServer(socketserver.DatagramRequestHandler):
         :return:
         """
 
-        if UDPSipServer.check_allowed(self.client_address[0]):
+        if not UDPSipServer.check_allowed(self.client_address[0]):
             return
 
         datagram = self.rfile.read()

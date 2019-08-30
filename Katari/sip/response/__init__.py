@@ -16,12 +16,12 @@ class Ack(SipMessage):
 
     def create_response(self, message=None):
         try:
-            message.set_via(self._data["via"])
-            message.set_from(self._data["from"])
-            message.set_to(self._data["to"])
-            message.set_contact(self._data["contact"])
-            message.set_call_id(self._data["call-id"])
-            message.set_cseq(self._data["cseq"])
+            self.set_via(mess)
+            self.set_from(self._data["from"])
+            self.set_to(self._data["to"])
+            self.set_contact(self._data["contact"])
+            self.set_call_id(self._data["call-id"])
+            self.set_cseq(self._data["cseq"])
             return message
         except:
             return message
