@@ -1,5 +1,6 @@
 import sys
 import logging
+from Katari.errors import UnKnownOutputMode
 from logging.handlers import RotatingFileHandler
 
 
@@ -13,6 +14,8 @@ class KatariLogging:
             )
         elif output_mode == "stdout":
             self.handler = logging.StreamHandler(sys.stdout)
+        else:
+            raise UnKnownOutputMode(output_mode)
         self.format_ = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
         self.handler.setFormatter(fmt=self.format_)
         self.log.addHandler(self.handler)
