@@ -43,9 +43,17 @@ from Katari.sip.response._2xx import OK200
 
 app = KatariApplication(settings=settings)
 
-@app.register()
-def do_register(request, client):
+@app.invite()
+def do_invite(request, client):
      app.send(request.create_response(OK200()), client)
-app.run()
+
+
+if __name__ == "__main__":   
+    app.run()
 
 ```
+
+
+
+
+

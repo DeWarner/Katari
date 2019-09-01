@@ -135,7 +135,7 @@ class KatariApplication(UDPSipServer):
             sys.exit()
 
     def _server_run(self, message, client):
-        message = self.run_middleware(message)
+        message = self.run_middleware_request(message)
         if message.sip_type == "REGISTER":
             try:
                 self.logger.info(
@@ -181,6 +181,7 @@ class KatariApplication(UDPSipServer):
         return request.create_response(NullMessage())
 
     def send(self, message, client):
+        self.run_middleware_response(message)
         self.logger.info("Sending response to {} ".format(client[0]))
         self.logger.debug("\n\n" + message.export())
         self.socket[1].sendto(message.export().encode(), client)
@@ -188,11 +189,16 @@ class KatariApplication(UDPSipServer):
     def receive(self):
         return SipMessage(self.rfile.read())
 
-    def run_middleware(self, message):
+    def run_middleware_request(self, message):
         for _m in self.middleware_array:
             message = _m.process_request(message)
         return message
-    
+
+    def run_middleware_response(self, message):
+        for _m in self.middleware_array:
+            message = _m.process_response(message)
+        return message
+
     def load_middleware(self):
         try:
             self.middleware_array = MiddlewareLoader(self.settings.KATARI_MIDDLEWARE).load()

@@ -1,0 +1,2 @@
+class SipClient:
+    pass

@@ -27,6 +27,6 @@ KATARI_LOGGING = {
 
 # where to enable katari middleware 
 KATARI_MIDDLEWARE = [
-    'Katari.middleware.sessions',
+    
 ]
 
