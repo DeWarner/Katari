@@ -175,35 +175,35 @@ Returns the SIP URI within the 'Via:' Header
 ```python
 
 SipMessage.get_via()
- ```
+```
 
 #### get_contact()
 Returns the SIP URI within the 'Contact:' Header 
 ```python
 
 SipMessage.get_contact()
- ```
+```
 
 #### get_call_id()
 Returns the Call Id within the 'Call-Id:' Header 
 ```python
 
 SipMessage.get_call_id()
- ```
+```
 
 #### get_allow()
 Returns the Allowed Methods within the 'Allow:' Header 
 ```python
 
 SipMessage.get_allow()
- ```
+```
 
 #### get_cseq()
 Returns the Call Sequence within the 'CSeq:' Header 
 ```python
 
 SipMessage.get_cseq()
- ```
+```
 
 #### get_message_type()
 Returns the Method/Status Code from the top line in the message 
