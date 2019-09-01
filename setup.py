@@ -33,10 +33,10 @@ setup(
     url = "http://packages.python.org/Katari",
     packages=find_packages(),
     long_description=read('README.md'),
+    long_description_content_type="text/markdown",
     scripts=['scripts/katari'],
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.6",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
