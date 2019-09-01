@@ -85,7 +85,9 @@ your middleware can modify the sip message before it reaches your main logic usi
 
 #### Example
 
+test.py
 ```python 
+
 
 from Katari.interfaces import MiddlewareInterface
 
@@ -101,7 +103,46 @@ class Test(MiddlewareInterface):
         return message
 
 ```
+settings.py
 
+```python
+"""
+##    ##    ###    ########    ###    ########  ####
+##   ##    ## ##      ##      ## ##   ##     ##  ##
+##  ##    ##   ##     ##     ##   ##  ##     ##  ##
+#####    ##     ##    ##    ##     ## ########   ##
+##  ##   #########    ##    ######### ##   ##    ##
+##   ##  ##     ##    ##    ##     ## ##    ##   ##
+##    ## ##     ##    ##    ##     ## ##     ## ####
+
+SIP (Session Initiated Protocol) Application Framework
+
+"""
+
+HOST = "127.0.0.1" #Specify interface to listen on 
+
+PORT = 5060 # Specify port to listen on
+
+ALLOWED_HOSTS = ["127.0.0.1"] # Katari whitelist
+
+USER_AGENT = "Katari Server 0.0.6" # User Agent sent in response 
+
+# Logging settings
+KATARI_LOGGING = {
+                   "LOGFILE" :"Katari.log",
+                   "LEVEL": "INFO", 
+                   "OUTPUTMODE": "file"
+                 }
+
+# Katari middleware 
+KATARI_MIDDLEWARE = [
+    'middleware.test',   # Add import path here
+    
+]
+
+
+
+```
 
 
 
