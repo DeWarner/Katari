@@ -25,7 +25,7 @@ KATARI_LOGGING = {
                    "OUTPUTMODE": "file"
                  }
 
-# where to enable katari middleware 
+# katari middleware 
 KATARI_MIDDLEWARE = [
     
 ]
