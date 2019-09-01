@@ -149,7 +149,8 @@ KATARI_MIDDLEWARE = [
 
 ## SIP Message Methods
 
-```
+```python
+
 Katari.sip.SipMessage 
 ```
 
@@ -157,49 +158,57 @@ Katari.sip.SipMessage
 
 #### get_to()
 Returns the SIP URI within the 'To:' Header 
-```
+```python
+
 SipMessage.get_to()
  ```
 
 #### get_from()
 Returns the SIP URI within the 'From:' Header 
-```
+```python
+
 SipMessage.get_from()
  ```
 
 #### get_via()
 Returns the SIP URI within the 'Via:' Header 
-```
+```python
+
 SipMessage.get_via()
  ```
 
 #### get_contact()
 Returns the SIP URI within the 'Contact:' Header 
-```
+```python
+
 SipMessage.get_contact()
  ```
 
 #### get_call_id()
 Returns the Call Id within the 'Call-Id:' Header 
-```
+```python
+
 SipMessage.get_call_id()
  ```
 
 #### get_allow()
 Returns the Allowed Methods within the 'Allow:' Header 
-```
+```python
+
 SipMessage.get_allow()
  ```
 
 #### get_cseq()
 Returns the Call Sequence within the 'CSeq:' Header 
-```
+```python
+
 SipMessage.get_cseq()
  ```
 
 #### get_message_type()
 Returns the Method/Status Code from the top line in the message 
-```
+```python
+
 SipMessage.get_message_type()
  ```
 
@@ -207,49 +216,56 @@ SipMessage.get_message_type()
 
 #### set_to()
 Sets the SIP URI within the 'To:' Header 
-```
+```python
+
 SipMessage.get_to()
- ```
+```
 
 #### set_from()
 Sets the SIP URI within the 'From:' Header 
-```
+```python
+
 SipMessage.get_from()
- ```
+```
 
 #### set_via()
 Sets the SIP URI within the 'Via:' Header 
-```
+```python
+
 SipMessage.get_via()
  ```
 
 #### set_contact()
 Sets the SIP URI within the 'Contact:' Header 
-```
+```python
 SipMessage.get_contact()
  ```
 
 #### set_call_id()
 Sets the Call Id within the 'Call-Id:' Header 
-```
+```python
+
 SipMessage.get_call_id()
  ```
 
 #### set_allow()
 Sets the Allowed Methods within the 'Allow:' Header 
-```
+```python
+
 SipMessage.get_allow()
- ```
+```
 
 #### set_cseq()
 Sets the Call Sequence within the 'CSeq:' Header 
-```
+```python
+
 SipMessage.get_cseq()
  ```
 
 #### set_message_type()
 Sets the Method/Status Code from the top line in the message 
-```
+```python
+
 SipMessage.get_message_type()
  ```
 
