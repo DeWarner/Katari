@@ -23,6 +23,36 @@ class SipMessage(Message):
             return self._data["via"]
         except KeyError:
             return None
+        
+    def get_contact(self):
+        try:
+            return self._data['contact']
+        except:
+            return None
+    
+    def get_call_id(self):
+        try:
+            return self._data['call-id']
+        except:
+            return None
+    
+    def get_allow(self):
+        try:
+            return self._data['allow']
+        except:
+            return None
+    
+    def get_cseq(self):
+        try:
+            return self._data['cseq']
+        except:
+            return None
+
+    def get_message_type(self):
+        try:
+            return self.sip_type
+        except:
+            return None
 
     def set_via(self, via):
         self._data["via"] = via
