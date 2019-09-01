@@ -160,15 +160,15 @@ Katari.sip.SipMessage
 Returns the SIP URI within the 'To:' Header 
 ```python
 
-SipMessage.get_to()
- ```
+ SipMessage.get_to()
+```
 
 #### get_from()
 Returns the SIP URI within the 'From:' Header 
 ```python
 
 SipMessage.get_from()
- ```
+```
 
 #### get_via()
 Returns the SIP URI within the 'Via:' Header 
@@ -210,7 +210,7 @@ Returns the Method/Status Code from the top line in the message
 ```python
 
 SipMessage.get_message_type()
- ```
+```
 
 ### Setters
 
@@ -233,20 +233,21 @@ Sets the SIP URI within the 'Via:' Header
 ```python
 
 SipMessage.get_via()
- ```
+```
 
 #### set_contact()
 Sets the SIP URI within the 'Contact:' Header 
 ```python
+
 SipMessage.get_contact()
- ```
+```
 
 #### set_call_id()
 Sets the Call Id within the 'Call-Id:' Header 
 ```python
 
 SipMessage.get_call_id()
- ```
+```
 
 #### set_allow()
 Sets the Allowed Methods within the 'Allow:' Header 
@@ -260,12 +261,12 @@ Sets the Call Sequence within the 'CSeq:' Header
 ```python
 
 SipMessage.get_cseq()
- ```
+```
 
 #### set_message_type()
 Sets the Method/Status Code from the top line in the message 
 ```python
 
 SipMessage.get_message_type()
- ```
+```
 
