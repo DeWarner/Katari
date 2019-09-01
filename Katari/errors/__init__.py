@@ -4,3 +4,5 @@ class NoBaseCommandClass(Exception):
 
 class NoSettingsFound(Exception):
     pass
+
+

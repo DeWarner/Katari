@@ -15,6 +15,15 @@ pip install Katari
 
 ```
 
+## Installing from Git
+
+```
+
+pip install git+https://github.com/hyperioxx/Katari.git
+
+```
+
+
 ## Getting Started
 
 to create a katari project run the following command in your terminal
@@ -28,17 +37,15 @@ katari --build-app <project name>
 
 #### app.py
 ```python
-
+import settings
 from Katari import KatariApplication
 from Katari.sip.response._2xx import OK200
 
-app = KatariApplication()
+app = KatariApplication(settings=settings)
 
 @app.register()
 def do_register(request, client):
-     app.send_response(request.create_response(OK200()))
-
-
+     app.send(request.create_response(OK200()), client)
 app.run()
 
 ```

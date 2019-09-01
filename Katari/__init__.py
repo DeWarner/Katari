@@ -17,6 +17,7 @@ from Katari.sip import SipMessage
 from Katari.sip.response._4xx import MethodNotAllowed405
 from Katari.sip.response import NullMessage, Ack
 from Katari.errors import NoSettingsFound
+from Katari.middleware import MiddlewareLoader
 
 
 class KatariApplication(UDPSipServer):
@@ -24,17 +25,25 @@ class KatariApplication(UDPSipServer):
     Katari instance is the main
     """
     def __init__(self, settings=None):
+        # Loads default settings
         if not settings:
             from Katari.template import settings
             self.settings = settings
         else:
             self.settings = settings
+
+
         UDPSipServer.settings = settings
+
         self.loggerinit = KatariLogging(filename=self.settings.KATARI_LOGGING['LOGFILE'], output_mode=self.settings.KATARI_LOGGING['OUTPUTMODE'])
         self.logger = self.loggerinit.get_logger()
         self._copy = False
         self.socket = None
         self.client = None
+
+        self.middleware_array = None
+
+        self.load_middleware()
 
         self.method_endpoint_register = {
             "INVITE": self.default_response,
@@ -126,6 +135,7 @@ class KatariApplication(UDPSipServer):
             sys.exit()
 
     def _server_run(self, message, client):
+        message = self.run_middleware(message)
         if message.sip_type == "REGISTER":
             try:
                 self.logger.info(
@@ -165,10 +175,7 @@ class KatariApplication(UDPSipServer):
                 self.logger.error(err)
 
     def default_response(self, request, client):
-        return request.create_response(MethodNotAllowed405())
-
-    def ack(self, request, client):
-        return request.create_response(Ack())
+        self.send(request.create_response(MethodNotAllowed405()), client)
 
     def null_response(self, request):
         return request.create_response(NullMessage())
@@ -180,3 +187,18 @@ class KatariApplication(UDPSipServer):
 
     def receive(self):
         return SipMessage(self.rfile.read())
+
+    def run_middleware(self, message):
+        for _m in self.middleware_array:
+            message = _m.process_request(message)
+        return message
+    
+    def load_middleware(self):
+        try:
+            self.middleware_array = MiddlewareLoader(self.settings.KATARI_MIDDLEWARE).load()
+        except ModuleNotFoundError as err:
+            self.logger.error("No middleware called {}".format(str(err).split(" ")[3]))
+            sys.exit(1)
+           
+        
+
