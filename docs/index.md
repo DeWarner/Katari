@@ -8,11 +8,6 @@
 ![PyPI version shields.io](https://img.shields.io/pypi/dm/Katari.svg)
 
 
-## Documentation 
-
-https://katari.readthedocs.io/en/latest/
-
-
 ## Installing
 
 ```
