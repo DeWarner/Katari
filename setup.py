@@ -35,8 +35,9 @@ setup(
     long_description=read('README.md'),
     scripts=['scripts/katari'],
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.6",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
 )
