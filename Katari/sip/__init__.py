@@ -14,7 +14,7 @@ class SipMessage(Message):
 
     def get_from(self):
         try:
-            return SipURI(self._data["from"])
+            return self._data["from"].split(' ')[-1]
         except KeyError:
             return None
 
