@@ -108,7 +108,6 @@ class KatariApplication(UDPSipServer):
         def decorator(f):
             self.method_endpoint_register["RESPONSE"] = f
             return f
-
         return decorator
 
 

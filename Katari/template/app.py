@@ -3,5 +3,8 @@ from Katari import KatariApplication
 
 app = KatariApplication(settings=settings)
 
+# Define SIP Method functions here 
 
-app.run()
+
+if __name__ == "__main__":
+    app.run()
