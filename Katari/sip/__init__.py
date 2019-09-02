@@ -57,6 +57,12 @@ class SipMessage(Message):
         except:
             return None
 
+    def get_content_length(self):
+        try:
+            self._data["content-length"]
+        except:
+            return None
+
     def set_via(self, via):
         self._data["via"] = via
 
@@ -80,6 +86,9 @@ class SipMessage(Message):
 
     def set_message_type(self, message_type):
         self.sip_type = message_type
+
+    def set_content_length(self, content_length):
+        self._data["content-length"] = content_length
 
     def export(self):
         message = ""
