@@ -70,8 +70,8 @@ class URI:
         self.log = logging.getLogger('Katari')
         self.uri = uri
         try:
-            self.user = re.search("sip:(.*)@(.*)(?=;)", uri).group(1)
-            self.address = re.search("sip:(.*)@(.*)(?=;)", uri).group(2)
+            self.user = re.search("sip:(.*)@(.*)(?=;|:)", uri).group(1)
+            self.address = re.search("sip:(.*)@(.*)(?=;|:)", uri).group(2)
         except Exception as err:
             self.log.exception(err)
             self.user = uri
