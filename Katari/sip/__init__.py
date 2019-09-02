@@ -94,7 +94,7 @@ class SipMessage(Message):
         message = ""
         message = message + self.method_line
         for k, v in self._data.items():
-            line = k.capitalize() + ": " + str(v) + '\r\n'
+            line = k.capitalize() + ": " + str(v).replace('\r','') + '\r\n'
             message = message + line 
         message = message + "\r\n\r\n"
         return message
