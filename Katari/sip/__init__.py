@@ -124,5 +124,9 @@ class SipMessage(Message):
             message.set_cseq(self._data['cseq'])
         except Exception as err:
             self.log.exception(err)
+        try:
+            message.set_content_length(self._data['content-length'])
+        except Exception as err:
+            self.log.exception(err)
         return message
         
