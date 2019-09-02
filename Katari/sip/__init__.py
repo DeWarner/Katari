@@ -1,3 +1,4 @@
+import logging
 from Katari.sip.utils import Message, URI
 
 
@@ -5,16 +6,18 @@ class SipMessage(Message):
     def __init__(self, message=None):
         super().__init__(message=message)
         self._payload = None
+        self.log = logging.getLogger('Katari')
 
     def get_to(self):
         try:
-            return URI(self._data["to"])
-        except KeyError:
+            return self._data["to"]
+        except KeyError as err:
+            print(err)
             return None
 
     def get_from(self):
         try:
-            return self._data["from"].split(' ')[-1]
+            return self._data["from"]
         except KeyError:
             return None
 
@@ -82,7 +85,7 @@ class SipMessage(Message):
         message = ""
         message = message + self.method_line
         for k, v in self._data.items():
-            line = k.capitalize() + ": " + v
+            line = k.capitalize() + ": " + str(v)
             message = message + line + "\r\n"
         message = message + "\r\n"
         return message
@@ -90,12 +93,27 @@ class SipMessage(Message):
     def create_response(self, message=None):
         try:
             message.set_via(self._data['via'])
+        except Exception as err:
+            self.log.exception(err)
+        try:
             message.set_from(self._data['from'])
+        except Exception as err:
+            self.log.exception(err)
+        try:
             message.set_to(self._data['to'])
+        except Exception as err:
+            self.log.exception(err)
+        try:
             message.set_contact(self._data['contact'])
+        except Exception as err:
+            self.log.exception(err)
+        try:
             message.set_call_id(self._data['call-id'])
+        except Exception as err:
+            self.log.exception(err)
+        try:
             message.set_cseq(self._data['cseq'])
-            return message
-        except Exception as e:
-            print(e)
-            return message
+        except Exception as err:
+            self.log.exception(err)
+        return message
+        

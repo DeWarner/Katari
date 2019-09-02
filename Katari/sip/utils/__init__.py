@@ -1,8 +1,10 @@
 """
 Utils module containing all sip header classes
 """
-from collections import OrderedDict
 import re
+import logging
+from collections import OrderedDict
+
 
 
 class Message:
@@ -12,6 +14,7 @@ class Message:
     def __init__(self, message):
         self.raw_message = message
         self._data = OrderedDict()
+        self.log = logging.getLogger('Katari')
         if message:
             self.method_line, self.headers = message.decode().split("\r\n", 1)
             self._parser(self.headers)
@@ -32,12 +35,21 @@ class Message:
         :param message:
         :return:
         """
-        for line in message.split("\r\n"):
+        reg=re.compile('([a-zA-Z-]+:) ?(.*)')
+        for header, value in dict(reg.findall(message)).items():
             try:
-                header, data = line.split(": ")
-                self._data[header.lower()] = data
+                print(header.lower())
+                if header.lower() == "to:":
+                    self._data[header.lower().replace(':','')] = URI(value)
+                elif header.lower() == "from:":
+                    self._data[header.lower().replace(':','')] = URI(value)
+                elif header.lower() == "contact:":
+                    self._data[header.lower().replace(':','')] = URI(value)
+                else:
+                    self._data[header.lower().replace(':','')] = value
             except Exception as err:
-                pass
+                self.log.exception(err)
+                self.log.debug(header, value)
 
     def get_method(self, methodline):
         """
@@ -55,12 +67,21 @@ class URI:
 
     """
     def __init__(self, uri):
+        self.log = logging.getLogger('Katari')
         self.uri = uri
-        self.address = re.search("sip:(.*)@(.*)(?=;)", uri).group(0)
-        self.user = re.search("sip:(.*)@(.*)(?=;)", uri).group(1)
+        try:
+            self.user = re.search("sip:(.*)@(.*)(?=;)", uri).group(1)
+            self.address = re.search("sip:(.*)@(.*)(?=;)", uri).group(2)
+        except Exception as err:
+            self.log.exception(err)
+            self.user = uri
+            self.address = uri
 
-    def __repr__(self) :
+    def __repr__(self):
         return self.uri
+
+    def __str__(self):
+        return str(self.uri)
 
     def get_address(self):
         return self.address
@@ -70,7 +91,7 @@ class URI:
 
 
 class Allow:
-    def __init__(self):
+    def __init__(self, values):
         pass
 
 class Via:
