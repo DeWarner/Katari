@@ -38,9 +38,6 @@ class SipParsingTests(unittest.TestCase):
 
     def test_sip_parse(self):
         message = SipMessage(message=sip_register.encode())
-
-        print("""sdasdasd"<sip:43210@127.0.0.1;transport=UDP>""")
-
         if message.get_to() == '"sdasdasd"<sip:43210@127.0.0.1;transport=UDP>':
             print("YES")
         print("NO")

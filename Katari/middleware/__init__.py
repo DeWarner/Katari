@@ -15,11 +15,10 @@ class MiddlewareLoader:
 
         middleware_array = []
 
-        for _m in self.middleware:
-            mod = importlib.import_module(_m)
-            klass = inspect.getmembers(sys.modules[_m], inspect.isclass)
-            newklass = getattr(mod, str(klass[1][0]))
-            middleware_array.append(newklass())
+        for _module in self.middleware:
+            mod = importlib.import_module(_module)
+            _class = getattr(mod, str(inspect.getmembers(sys.modules[_module], inspect.isclass)[1][0]))
+            middleware_array.append(_class())
             self.log.info("Middleware {} Loaded".format(mod.__name__))
         return middleware_array
             
