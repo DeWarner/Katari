@@ -67,7 +67,6 @@ class KatariApplication(UDPSipServer):
         def decorator(f):
             self.method_endpoint_register["REGISTER"] = f
             return f
-
         return decorator
 
     def ack(self):
@@ -166,6 +165,8 @@ class KatariApplication(UDPSipServer):
                 self.method_endpoint_register["CANCEL"](message, client)
             except Exception as err:
                 self.logger.error(err)
+        elif message.sip_type == "ACK":
+            self.logger.info("Received Ack from {} ".format(client[0]))
         else:
             try:
                 self.logger.info("Received response from {} ".format(client[0]))
