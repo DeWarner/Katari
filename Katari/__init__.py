@@ -193,13 +193,13 @@ class KatariApplication(UDPSipServer):
 
     def run_middleware_request(self, message, client):
         for _m in self.middleware_array:
-            message = _m.process_request(message, client)
-        return message
+            message, client = _m.process_request(message, client)
+        return message , client
 
     def run_middleware_response(self, message, client):
         for _m in self.middleware_array:
-            message = _m.process_response(message, client)
-        return message
+            message, client = _m.process_response(message, client)
+        return message, client
 
     def load_middleware(self):
         try:
