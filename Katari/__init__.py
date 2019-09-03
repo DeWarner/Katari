@@ -181,6 +181,7 @@ class KatariApplication(UDPSipServer):
         return request.create_response(NullMessage())
 
     def send(self, message, client):
+        """ Middleware execution """
         message, client = self.run_middleware_response(message, client)
         self.logger.info("Sending response to {} ".format(client[0]))
         self.logger.debug("\n\n" + message.export())
