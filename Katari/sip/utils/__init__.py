@@ -38,7 +38,6 @@ class Message:
         reg=re.compile('([a-zA-Z-]+:) ?(.*)')
         for header, value in dict(reg.findall(message)).items():
             try:
-                print(header.lower())
                 if header.lower() == "to:":
                     self._data[header.lower().replace(':','')] = URI(value)
                 elif header.lower() == "from:":

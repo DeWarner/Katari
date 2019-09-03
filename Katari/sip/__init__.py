@@ -11,8 +11,7 @@ class SipMessage(Message):
     def get_to(self):
         try:
             return self._data["to"]
-        except KeyError as err:
-            print(err)
+        except KeyError:
             return None
 
     def get_from(self):
@@ -36,25 +35,25 @@ class SipMessage(Message):
     def get_call_id(self):
         try:
             return self._data['call-id']
-        except:
+        except KeyError:
             return None
     
     def get_allow(self):
         try:
             return self._data['allow']
-        except:
+        except KeyError:
             return None
     
     def get_cseq(self):
         try:
             return self._data['cseq']
-        except:
+        except KeyError:
             return None
 
     def get_message_type(self):
         try:
             return self.sip_type
-        except:
+        except KeyError:
             return None
 
     def get_content_length(self):
@@ -94,7 +93,7 @@ class SipMessage(Message):
         message = ""
         message = message + self.method_line
         for k, v in self._data.items():
-            line = k.capitalize() + ": " + str(v) + '\r\n'
+            line = k.capitalize() + ": " + str(v).replace('\r\n','') + '\r\n'
             message = message + line 
         message = message + "\r\n\r\n"
         return message
