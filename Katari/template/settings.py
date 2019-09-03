@@ -17,7 +17,7 @@ PORT = 5060 # Specify port to listen on
 
 ALLOWED_HOSTS = ["127.0.0.1"] # Katari whitelist
 
-USER_AGENT = "Katari Server 0.0.6" # User Agent sent in response 
+USER_AGENT = "Katari Server 0.0.7" # User Agent sent in response 
 
 KATARI_LOGGING = {
                    "LOGFILE" :"Katari.log",
@@ -29,4 +29,13 @@ KATARI_LOGGING = {
 KATARI_MIDDLEWARE = [
     
 ]
+
+KATARI_DATABASE = {
+                  'katari':{
+                     'ENGINE':'sqlite', 
+                     'HOST':'127.0.0.1',
+                     'NAME': 'katari',
+                     'USER': '',
+                     'PASS': '', 
+                  }}
 
