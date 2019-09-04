@@ -68,9 +68,25 @@ class URI:
     def __init__(self, uri):
         self.log = logging.getLogger('Katari')
         self.uri = uri
+       
         try:
-            self.user = re.search("sip:(.*)@(.*)(?=;|:)", uri).group(1)
-            self.address = re.search("sip:(.*)@(.*)(?=;|:)", uri).group(2)
+            self.expression = re.compile(
+                        '(?P<scheme>\w+):' 
+                        +'(?:(?P<user>[+\w\.]+):?(?P<password>[\w\.]+)?@)?'
+                        +'\[?(?P<host>' 
+                            +'(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|' 
+                            +'(?:(?:[0-9a-fA-F]{1,4}):){7}[0-9a-fA-F]{1,4}|' 
+                            +'(?:(?:[0-9A-Za-z]+\.)+[0-9A-Za-z]+)'
+                        +')\]?:?' 
+                        +'(?P<port>\d{1,6})?' 
+                        +'(?:\;(?P<params>[^\?]*))?' 
+                        +'(?:\?(?P<headers>.*))?' 
+            )
+            self.user = self.expression.search(uri).group('user')
+            self.params = self.expression.search(uri).group('params')
+            self.address = self.expression.search(uri).group('port')
+            self.port = self.expression.search(uri).group('headers')
+            self.address = self.expression.search(uri).group('host')
         except Exception as err:
             self.log.exception(err)
             self.user = uri
