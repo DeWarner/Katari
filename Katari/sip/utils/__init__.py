@@ -35,17 +35,18 @@ class Message:
         :param message:
         :return:
         """
-        reg=re.compile('([a-zA-Z-]+:) ?(.*)')
+        reg=re.compile('([a-zA-Z-]+):(.*)')
         for header, value in dict(reg.findall(message)).items():
+            value = value.replace('\n\r', '')
             try:
-                if header.lower() == "to:":
-                    self._data[header.lower().replace(':','')] = URI(value)
-                elif header.lower() == "from:":
-                    self._data[header.lower().replace(':','')] = URI(value)
-                elif header.lower() == "contact:":
-                    self._data[header.lower().replace(':','')] = URI(value)
+                if header.lower() == "to":
+                    self._data[header.lower()] = URI(value)
+                elif header.lower() == "from":
+                    self._data[header.lower()] = URI(value)
+                elif header.lower() == "contact":
+                    self._data[header.lower()] = URI(value)
                 else:
-                    self._data[header.lower().replace(':','')] = value
+                    self._data[header.lower()] = value
             except Exception as err:
                 self.log.exception(err)
                 self.log.debug(header, value)
