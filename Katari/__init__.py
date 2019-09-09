@@ -67,7 +67,6 @@ class KatariApplication(UDPSipServer):
         def decorator(f):
             self.method_endpoint_register["REGISTER"] = f
             return f
-
         return decorator
 
     def ack(self):
@@ -135,7 +134,7 @@ class KatariApplication(UDPSipServer):
             sys.exit()
 
     def _server_run(self, message, client):
-        message = self.run_middleware_request(message, client)
+        message, client = self.run_middleware_request(message, client)
         if message.sip_type == "REGISTER":
             try:
                 self.logger.info(
@@ -166,6 +165,8 @@ class KatariApplication(UDPSipServer):
                 self.method_endpoint_register["CANCEL"](message, client)
             except Exception as err:
                 self.logger.error(err)
+        elif message.sip_type == "ACK":
+            self.logger.info("Received Ack from {} ".format(client[0]))
         else:
             try:
                 self.logger.info("Received response from {} ".format(client[0]))
@@ -181,7 +182,8 @@ class KatariApplication(UDPSipServer):
         return request.create_response(NullMessage())
 
     def send(self, message, client):
-        message = self.run_middleware_response(message, client)
+        """ Middleware execution """
+        message, client = self.run_middleware_response(message, client)
         self.logger.info("Sending response to {} ".format(client[0]))
         self.logger.debug("\n\n" + message.export())
         self.socket[1].sendto(message.export().encode(), client)
@@ -191,13 +193,15 @@ class KatariApplication(UDPSipServer):
 
     def run_middleware_request(self, message, client):
         for _m in self.middleware_array:
-            message = _m.process_request(message, client)
-        return message
+            self.logger.debug("running request middleware layer {}".format(_m))
+            message, client = _m.process_request(message, client)
+        return message , client
 
     def run_middleware_response(self, message, client):
         for _m in self.middleware_array:
-            message = _m.process_response(message, client)
-        return message
+            self.logger.debug("running response middleware layer {}".format(_m))
+            message, client = _m.process_response(message, client)
+        return message, client
 
     def load_middleware(self):
         try:

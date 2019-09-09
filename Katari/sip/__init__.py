@@ -11,8 +11,7 @@ class SipMessage(Message):
     def get_to(self):
         try:
             return self._data["to"]
-        except KeyError as err:
-            print(err)
+        except KeyError:
             return None
 
     def get_from(self):
@@ -36,25 +35,25 @@ class SipMessage(Message):
     def get_call_id(self):
         try:
             return self._data['call-id']
-        except:
+        except KeyError:
             return None
     
     def get_allow(self):
         try:
             return self._data['allow']
-        except:
+        except KeyError:
             return None
     
     def get_cseq(self):
         try:
             return self._data['cseq']
-        except:
+        except KeyError:
             return None
 
     def get_message_type(self):
         try:
             return self.sip_type
-        except:
+        except KeyError:
             return None
 
     def get_content_length(self):
@@ -94,7 +93,9 @@ class SipMessage(Message):
         message = ""
         message = message + self.method_line
         for k, v in self._data.items():
-            line = k.capitalize() + ": " + str(v).replace('\r','') + '\r\n'
+            value = str(v).replace('\r\n','')
+            value = value.replace('\r','')
+            line = k.capitalize() + ": " + value + "\r\n"
             message = message + line 
         message = message + "\r\n\r\n"
         return message
@@ -102,31 +103,31 @@ class SipMessage(Message):
     def create_response(self, message=None):
         try:
             message.set_via(self._data['via'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError:
+            self.log.debug("Via Header not in request")
         try:
             message.set_from(self._data['from'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError:
+            self.log.debug("From Header not in request")
         try:
             message.set_to(self._data['to'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError :
+            self.log.debug("To Header not in request")
         try:
             message.set_contact(self._data['contact'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError:
+            self.log.debug("Contact Header not in request")
         try:
             message.set_call_id(self._data['call-id'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError:
+            self.log.debug("Call-ID Header not in request")
         try:
             message.set_cseq(self._data['cseq'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError:
+            self.log.exception("CSeq Header not in request")
         try:
             message.set_content_length(self._data['content-length'])
-        except Exception as err:
-            self.log.exception(err)
+        except KeyError:
+            self.log.exception("Content-Length Header not in request")
         return message
         

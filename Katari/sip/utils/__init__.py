@@ -35,18 +35,18 @@ class Message:
         :param message:
         :return:
         """
-        reg=re.compile('([a-zA-Z-]+:) ?(.*)')
+        reg=re.compile('([a-zA-Z-]+):(.*)')
         for header, value in dict(reg.findall(message)).items():
+            value = value.replace('\n\r', '')
             try:
-                print(header.lower())
-                if header.lower() == "to:":
-                    self._data[header.lower().replace(':','')] = URI(value)
-                elif header.lower() == "from:":
-                    self._data[header.lower().replace(':','')] = URI(value)
-                elif header.lower() == "contact:":
-                    self._data[header.lower().replace(':','')] = URI(value)
+                if header.lower() == "to":
+                    self._data[header.lower()] = URI(value)
+                elif header.lower() == "from":
+                    self._data[header.lower()] = URI(value)
+                elif header.lower() == "contact":
+                    self._data[header.lower()] = URI(value)
                 else:
-                    self._data[header.lower().replace(':','')] = value
+                    self._data[header.lower()] = value
             except Exception as err:
                 self.log.exception(err)
                 self.log.debug(header, value)
@@ -69,9 +69,25 @@ class URI:
     def __init__(self, uri):
         self.log = logging.getLogger('Katari')
         self.uri = uri
+       
         try:
-            self.user = re.search("sip:(.*)@(.*)(?=;|:)", uri).group(1)
-            self.address = re.search("sip:(.*)@(.*)(?=;|:)", uri).group(2)
+            self.expression = re.compile(
+                        '(?P<scheme>\w+):' 
+                        +'(?:(?P<user>[+\w\.]+):?(?P<password>[\w\.]+)?@)?'
+                        +'\[?(?P<host>' 
+                            +'(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|' 
+                            +'(?:(?:[0-9a-fA-F]{1,4}):){7}[0-9a-fA-F]{1,4}|' 
+                            +'(?:(?:[0-9A-Za-z]+\.)+[0-9A-Za-z]+)'
+                        +')\]?:?' 
+                        +'(?P<port>\d{1,6})?' 
+                        +'(?:\;(?P<params>[^\?]*))?' 
+                        +'(?:\?(?P<headers>.*))?' 
+            )
+            self.user = self.expression.search(uri).group('user')
+            self.params = self.expression.search(uri).group('params')
+            self.address = self.expression.search(uri).group('port')
+            self.port = self.expression.search(uri).group('headers')
+            self.address = self.expression.search(uri).group('host')
         except Exception as err:
             self.log.exception(err)
             self.user = uri

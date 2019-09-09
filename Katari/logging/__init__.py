@@ -5,9 +5,9 @@ from logging.handlers import RotatingFileHandler
 
 
 class KatariLogging:
-    def __init__(self, filename=None, output_mode="file"):
+    def __init__(self, filename="Katari.log", output_mode="file", level=logging.DEBUG):
         self.log = logging.getLogger('Katari')
-        self.log.setLevel(logging.DEBUG)
+        self.log.setLevel(level)
         if output_mode == 'file':
             self.handler = RotatingFileHandler(
                 filename, maxBytes=50 * 100000, backupCount=15

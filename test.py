@@ -41,9 +41,6 @@ class SipParsingTests(unittest.TestCase):
         if message.get_to() == '"sdasdasd"<sip:43210@127.0.0.1;transport=UDP>':
             print("YES")
         print("NO")
-        #print(type(""""sdasdasd"<sip:43210@127.0.0.1;transport=UDP>"""))
-        #self.assertEqual(str(message.get_to()), """"sdasdasd"<sip:43210@127.0.0.1;transport=UDP>""")
-
 
 
 if __name__ == '__main__':
