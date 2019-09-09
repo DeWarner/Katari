@@ -2,3 +2,4 @@ build/
 dist/
 Katari.egg-info/
 PySIPENV/
+__pycache__
