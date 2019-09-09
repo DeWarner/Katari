@@ -1,4 +1,4 @@
-![alt text](https://github.com/hyperioxx/Katari/blob/master/Katari.png "Katari Logo")
+![alt text](https://github.com/hyperioxx/Katari/blob/master/Katari.svg"Katari Logo")
 
 # Katari - SIP (Session Initiated Protocol) Application Framework
 
